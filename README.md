@@ -1,3 +1,3 @@
-# WSK Forms
+# WSK Context
 
-Open [WSK Forms](https://users.metropolia.fi/~ksenishl/wsk-forms/) to view it in the browser.
+Open [WSK Context](https://users.metropolia.fi/~ksenishl/wsk-context/) to view it in the browser.
