@@ -1,3 +1,3 @@
-# WSK Context
+# WSK Upload
 
-Open [WSK Context](https://users.metropolia.fi/~ksenishl/wsk-context/) to view it in the browser.
+Open [WSK Upload](https://users.metropolia.fi/~ksenishl/wsk-upload/) to view it in the browser.
