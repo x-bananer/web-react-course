@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 
 const MediaRow = (props) => {
-	const {item} = props;
+	const { item, selectedItem, setSelectedItem } = props;
+	const isSelected = selectedItem?.media_id === item.media_id;
 
 	return (
-		<tr>
+		<tr className={isSelected ? 'media-row media-row--selected' : 'media-row'}>
 			<td>
 				<img className="media-thumb" src={item.thumbnail} alt={item.title} />
 			</td>
@@ -13,6 +14,11 @@ const MediaRow = (props) => {
 			<td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
 			<td>{item.filesize}</td>
 			<td>{item.media_type}</td>
+			<td>
+				<button type="button" onClick={() => setSelectedItem(item)}>
+					View
+				</button>
+			</td>
 		</tr>
 	);
 };
@@ -29,6 +35,10 @@ MediaRow.propTypes = {
 		description: PropTypes.string.isRequired,
 		created_at: PropTypes.string.isRequired,
 	}).isRequired,
+	selectedItem: PropTypes.shape({
+		media_id: PropTypes.number.isRequired,
+	}),
+	setSelectedItem: PropTypes.func.isRequired,
 };
 
 export default MediaRow;
