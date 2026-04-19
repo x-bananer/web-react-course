@@ -22,6 +22,7 @@ const Single = () => {
 				<img src={item.filename} alt={item.title} />
 			)}
 			<p>Created: {new Date(item.created_at).toLocaleString('fi-FI')}</p>
+			<p>Owner: {item.username}</p>
 			<p>Type: {item.media_type}</p>
 			<p>Size: {item.filesize}</p>
 		</section>
