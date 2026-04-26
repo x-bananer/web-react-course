@@ -12,25 +12,35 @@ export const Layout = () => {
 	return (
 		<div>
 			<nav>
-				<ul>
+				<ul className="m-0 flex justify-end overflow-hidden bg-[#333333] p-0 *:list-none">
 					<li>
-						<Link to="/">Home</Link>
+						<Link className="block p-4 text-center text-white no-underline hover:bg-[#111111]" to="/">
+							Home
+						</Link>
 					</li>
 					{user ? (
 						<>
 							<li>
-								<Link to="/profile">Profile</Link>
+								<Link className="block p-4 text-center text-white no-underline hover:bg-[#111111]" to="/profile">
+									Profile
+								</Link>
 							</li>
 							<li>
-								<Link to="/upload">Upload</Link>
+								<Link className="block p-4 text-center text-white no-underline hover:bg-[#111111]" to="/upload">
+									Upload
+								</Link>
 							</li>
 							<li>
-								<Link to="/logout">Logout</Link>
+								<Link className="block p-4 text-center text-white no-underline hover:bg-[#111111]" to="/logout">
+									Logout
+								</Link>
 							</li>
 						</>
 					) : (
 						<li>
-							<Link to="/login">Login</Link>
+							<Link className="block p-4 text-center text-white no-underline hover:bg-[#111111]" to="/login">
+								Login
+							</Link>
 						</li>
 					)}
 				</ul>

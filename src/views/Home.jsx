@@ -6,18 +6,18 @@ const Home = () => {
 
 	return (
 		<>
-			<h2>My Media</h2>
-			<table className="media-table">
+			<h2 className="my-6 text-3xl">My Media</h2>
+			<table className="w-full table-fixed border-collapse">
 				<thead>
 					<tr>
-						<th>Thumbnail</th>
-						<th>Title</th>
-						<th>Description</th>
-						<th>Created</th>
-						<th>Size</th>
-						<th>Type</th>
-						<th>Owner</th>
-						<th>View</th>
+						<th className="border border-[#ccc] p-4 text-center">Thumbnail</th>
+						<th className="border border-[#ccc] p-4 text-center">Title</th>
+						<th className="border border-[#ccc] p-4 text-center">Description</th>
+						<th className="border border-[#ccc] p-4 text-center">Created</th>
+						<th className="border border-[#ccc] p-4 text-center">Size</th>
+						<th className="border border-[#ccc] p-4 text-center">Type</th>
+						<th className="border border-[#ccc] p-4 text-center">Owner</th>
+						<th className="border border-[#ccc] p-4 text-center">Actions</th>
 					</tr>
 				</thead>
 				<tbody>

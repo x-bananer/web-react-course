@@ -9,7 +9,7 @@ const Profile = () => {
 
 	return (
 		<section>
-			<h1>Profile</h1>
+			<h1 className="my-6 text-3xl">Profile</h1>
 			<p>Username: {user.username}</p>
 			<p>Email: {user.email}</p>
 			<p>User ID: {user.user_id}</p>

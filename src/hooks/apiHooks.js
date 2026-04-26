@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { fetchData } from '../utils/fetchData';
+import {useEffect, useState} from 'react';
+import {fetchData} from '../utils/fetchData';
 
 const useMedia = () => {
 	const [mediaArray, setMediaArray] = useState([]);
@@ -8,17 +8,7 @@ const useMedia = () => {
 		const getMedia = async () => {
 			try {
 				const json = await fetchData(import.meta.env.VITE_MEDIA_API + '/media');
-				const mediaWithUser = await Promise.all(
-					json.map(async (item) => {
-						const result = await fetchData(
-							import.meta.env.VITE_AUTH_API + '/users/' + item.user_id,
-						);
-
-						return { ...item, username: result.username };
-					}),
-				);
-
-				setMediaArray(mediaWithUser);
+				setMediaArray(json);
 			} catch (error) {
 				console.error(error);
 			}
@@ -45,12 +35,36 @@ const useMedia = () => {
 		};
 		const mediaResult = await fetchData(
 			import.meta.env.VITE_MEDIA_API + '/media',
-			fetchOptions,
+			fetchOptions
 		);
 		return mediaResult;
 	};
 
-	return { mediaArray, postMedia };
+	const deleteMedia = async (mediaId, token) => {
+		const fetchOptions = {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		return fetchData(import.meta.env.VITE_MEDIA_API + '/media/' + mediaId, fetchOptions);
+	};
+
+	const modifyMedia = async (mediaId, mediaItem, token) => {
+		const fetchOptions = {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(mediaItem),
+		};
+
+		return fetchData(import.meta.env.VITE_MEDIA_API + '/media/' + mediaId, fetchOptions);
+	};
+
+	return {mediaArray, postMedia, deleteMedia, modifyMedia};
 };
 
 const useAuthentication = () => {
@@ -64,12 +78,12 @@ const useAuthentication = () => {
 		};
 		const loginResult = await fetchData(
 			import.meta.env.VITE_AUTH_API + '/auth/login',
-			fetchOptions,
+			fetchOptions
 		);
 		return loginResult;
 	};
 
-	return { postLogin };
+	return {postLogin};
 };
 
 const useUser = () => {
@@ -81,7 +95,10 @@ const useUser = () => {
 				Authorization: `Bearer ${token}`,
 			},
 		};
-		const userData = await fetchData(import.meta.env.VITE_AUTH_API + '/users/token', fetchOptions);
+		const userData = await fetchData(
+			import.meta.env.VITE_AUTH_API + '/users/token',
+			fetchOptions
+		);
 		setUser(userData);
 		return userData;
 	};
@@ -98,7 +115,7 @@ const useUser = () => {
 		return userResult;
 	};
 
-	return { user, getUserByToken, postUser };
+	return {user, getUserByToken, postUser};
 };
 
 const useFile = () => {
@@ -116,12 +133,57 @@ const useFile = () => {
 
 		const fileResult = await fetchData(
 			import.meta.env.VITE_UPLOAD_SERVER + '/upload',
-			fetchOptions,
+			fetchOptions
 		);
 		return fileResult;
 	};
 
-	return { postFile };
+	return {postFile};
 };
 
-export { useMedia, useAuthentication, useUser, useFile };
+const useLike = () => {
+	const getLikeCountByMediaId = async (mediaId) => {
+		return fetchData(import.meta.env.VITE_MEDIA_API + '/likes/count/' + mediaId);
+	};
+
+	const getLikeByUser = async (mediaId, token) => {
+		const fetchOptions = {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		return fetchData(
+			import.meta.env.VITE_MEDIA_API + '/likes/bymedia/user/' + mediaId,
+			fetchOptions
+		);
+	};
+
+	const postLike = async (mediaId, token) => {
+		const fetchOptions = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({media_id: mediaId}),
+		};
+
+		return fetchData(import.meta.env.VITE_MEDIA_API + '/likes', fetchOptions);
+	};
+
+	const deleteLike = async (likeId, token) => {
+		const fetchOptions = {
+			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		};
+
+		return fetchData(import.meta.env.VITE_MEDIA_API + '/likes/' + likeId, fetchOptions);
+	};
+
+	return {getLikeCountByMediaId, getLikeByUser, postLike, deleteLike};
+};
+
+export {useMedia, useAuthentication, useUser, useFile, useLike};

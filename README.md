@@ -1,3 +1,3 @@
-# WSK Upload
+# WSK Tailwind
 
-Open [WSK Upload](https://users.metropolia.fi/~ksenishl/wsk-upload/) to view it in the browser.
+Open [WSK Tailwind](https://users.metropolia.fi/~ksenishl/wsk-tailwind/) to view it in the browser.

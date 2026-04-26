@@ -10,24 +10,27 @@ const RegisterForm = () => {
 
 	const { postUser } = useUser();
 
-	const doRegister = async () => {
+	const doRegister = async (formInputs) => {
 		try {
-			const registerResult = await postUser(inputs);
+			const registerResult = await postUser(formInputs);
 			console.log(registerResult);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	const { inputs, handleInputChange, handleSubmit } = useForm(doRegister, initValues);
+	const { handleInputChange, handleSubmit } = useForm(doRegister, initValues);
 
 	return (
 		<>
-			<h1>Register</h1>
-			<form onSubmit={handleSubmit}>
-				<div>
-					<label htmlFor="registeremail">Email</label>
+			<h1 className="my-6 text-3xl">Register</h1>
+			<form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="registeremail">
+						Email
+					</label>
 					<input
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
 						name="email"
 						type="email"
 						id="registeremail"
@@ -35,9 +38,12 @@ const RegisterForm = () => {
 						autoComplete="email"
 					/>
 				</div>
-				<div>
-					<label htmlFor="registeruser">Username</label>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="registeruser">
+						Username
+					</label>
 					<input
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
 						name="username"
 						type="text"
 						id="registeruser"
@@ -45,9 +51,12 @@ const RegisterForm = () => {
 						autoComplete="username"
 					/>
 				</div>
-				<div>
-					<label htmlFor="registerpassword">Password</label>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="registerpassword">
+						Password
+					</label>
 					<input
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
 						name="password"
 						type="password"
 						id="registerpassword"
@@ -55,7 +64,12 @@ const RegisterForm = () => {
 						autoComplete="new-password"
 					/>
 				</div>
-				<button type="submit">Register</button>
+				<button
+					className="my-2.5 rounded-[5px] border-none bg-[#363636] p-[10px] text-white"
+					type="submit"
+				>
+					Register
+				</button>
 			</form>
 		</>
 	);

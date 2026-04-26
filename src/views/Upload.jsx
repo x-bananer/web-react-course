@@ -21,11 +21,11 @@ const Upload = () => {
 		}
 	};
 
-	const doUpload = async () => {
+	const doUpload = async (formInputs) => {
 		try {
 			const token = localStorage.getItem('token');
 			const fileResult = await postFile(file, token);
-			await postMedia(fileResult, inputs, token);
+			await postMedia(fileResult, formInputs, token);
 			navigate('/');
 		} catch (e) {
 			console.log(e.message);
@@ -36,24 +36,38 @@ const Upload = () => {
 
 	return (
 		<>
-			<h1>Upload</h1>
-			<form onSubmit={handleSubmit}>
-				<div>
-					<label htmlFor="title">Title</label>
-					<input name="title" type="text" id="title" onChange={handleInputChange} />
+			<h1 className="my-6 text-3xl">Upload</h1>
+			<form className="flex flex-col items-center justify-center" onSubmit={handleSubmit}>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="title">
+						Title
+					</label>
+					<input
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
+						name="title"
+						type="text"
+						id="title"
+						onChange={handleInputChange}
+					/>
 				</div>
-				<div>
-					<label htmlFor="description">Description</label>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="description">
+						Description
+					</label>
 					<textarea
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
 						name="description"
 						rows={5}
 						id="description"
 						onChange={handleInputChange}
 					></textarea>
 				</div>
-				<div>
-					<label htmlFor="file">File</label>
+				<div className="flex w-4/5 flex-col">
+					<label htmlFor="file">
+						File
+					</label>
 					<input
+						className="my-2.5 rounded-[5px] border border-[#ccc] p-[10px]"
 						name="file"
 						type="file"
 						id="file"
@@ -62,6 +76,7 @@ const Upload = () => {
 					/>
 				</div>
 				<img
+					className="my-[10px] h-[200px] w-[200px] rounded-[5px] object-cover"
 					src={
 						file
 							? URL.createObjectURL(file)
@@ -70,7 +85,11 @@ const Upload = () => {
 					alt="preview"
 					width="200"
 				/>
-				<button type="submit" disabled={file && inputs.title.length > 3 ? false : true}>
+				<button
+					className="my-2.5 rounded-[5px] border-none bg-[#363636] p-[10px] text-white"
+					type="submit"
+					disabled={file && inputs.title.length > 3 ? false : true}
+				>
 					Upload
 				</button>
 			</form>
